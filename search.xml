@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>python--信息自动发送器</title>
+      <link href="/2023/04/06/python%E5%AE%9E%E7%8E%B0%20--%20QQ%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%99%A8/"/>
+      <url>/2023/04/06/python%E5%AE%9E%E7%8E%B0%20--%20QQ%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h1><pre><code class="python">import win32guiimport win32apiimport win32conimport win32clipboard as wimport timeimport optparseimport randomimport requestsdef ctrlV():    win32api.keybd_event(17,0,0,0)  #ctrl键位码是17    win32api.keybd_event(86,0,0,0)  #v键位码是86    win32api.keybd_event(86,0,win32con.KEYEVENTF_KEYUP,0) #释放按键    win32api.keybd_event(17,0,win32con.KEYEVENTF_KEYUP,0)def send(name, msg,sleep_time):    #打开剪贴板    w.OpenClipboard()    #清空剪贴板    w.EmptyClipboard()    #设置剪贴板内容    w.SetClipboardData(win32con.CF_UNICODETEXT, msg)    #获取剪贴板内容    date = w.GetClipboardData()    #关闭剪贴板    w.CloseClipboard()    #获取窗口句柄    handle = win32gui.FindWindow(None,name)    if handle == 0:        print(&#39;---------为打开该窗口------&#39;)    #显示窗口    win32gui.ShowWindow(handle,win32con.SW_SHOW)    #把剪切板内容粘贴到qq窗口    ctrlV()    time.sleep(sleep_time)#延缓进程    #win32gui.SendMessage(handle, win32con.WM_PASTE, 0, 0)    #按下后松开回车键，发送消息    win32gui.SendMessage(handle, win32con.WM_KEYDOWN, win32con.VK_RETURN, 0)    win32gui.SendMessage(handle, win32con.WM_KEYUP, win32con.VK_RETURN, 0)def banner():    print(&quot;&quot;&quot;           _______ .__   __.  _______   ____   ____    ____  ___   .______                |   ____||  \ |  | |       \ |___ \  \   \  /   / / _ \  |   _  \               |  |__   |   \|  | |  .--.  |  __) |  \   \/   / | | | | |  |_)  |              |   __|  |  . `  | |  |  |  | |__ &lt;    \      /  | | | | |      /               |  |____ |  |\   | |  &#39;--&#39;  | ___) |    \    /   | |_| | |  |\  \----.          |_______||__| \__| |_______/ |____/      \__/     \___/  | _| `._____|          &quot;&quot;&quot;)def RUN():    banner()    print(&#39;------RUN-----&#39;)    usage = &#39;python %prog -u/--user &lt;target user&gt; / -m/--msg &lt;target message&gt; -t/--time &lt;target times&gt;&#39;    parser = optparse.OptionParser(usage)    parser.add_option(&#39;-u&#39;,&#39;--user&#39;,dest=&quot;user&quot;,type=&quot;string&quot;,help = &quot;target user&quot;,default=&quot;cyh这辈子最爱的唯一亲老婆&quot;)    parser.add_option(&#39;-m&#39;,&#39;--msg&#39;,dest=&quot;message&quot;,type=&quot;string&quot;,help = &quot;target message&quot;,default = &quot;我永远爱你!&quot;)    parser.add_option(&#39;-t&#39;,&#39;--time&#39;,dest=&quot;time&quot;,type=&quot;int&quot;,help = &quot;target times&quot;,default = 5)    parser.add_option(&#39;-s&#39;,&#39;--sleep&#39;,dest=&quot;sleep&quot;,type=&quot;float&quot;,help = &quot;target sleep time&quot;,default = 1)    parser.add_option(&#39;-c&#39;,&#39;--choice&#39;,dest=&quot;choice&quot;,type=&quot;string&quot;,help = &quot;function selection&quot;,default = &#39;1&#39;)    opts,args = parser.parse_args()    if(opts.choice == &#39;1&#39;):        for i in range(0, opts.time):            print(&quot;发送成功:&quot;+opts.message)            send(opts.user, opts.message,opts.sleep)        print(&#39;-----over----&#39;)    else:        for i in range(0, opts.time):            message = sentence(opts.choice)            print(&quot;发送成功:&quot;+message)            send(opts.user,message,opts.sleep)        print(&#39;-----over----&#39;)def sentence(choice):    url = &quot;https://v1.hitokoto.cn/?c=&quot;+ choice +&quot;&amp;encode=text&amp;min_length=15&quot;    r = requests.post(url)    return r.textif __name__ == &quot;__main__&quot;:    RUN()</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> python开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2023年东南大学916初复试经验贴</title>
       <link href="/2023/04/06/2023%E4%B8%9C%E5%8D%97%E5%A4%A7%E5%AD%A6916%E5%88%9D%E8%AF%95%E5%A4%8D%E8%AF%95%E7%BB%8F%E9%AA%8C%E8%B4%B4/"/>
       <url>/2023/04/06/2023%E4%B8%9C%E5%8D%97%E5%A4%A7%E5%AD%A6916%E5%88%9D%E8%AF%95%E5%A4%8D%E8%AF%95%E7%BB%8F%E9%AA%8C%E8%B4%B4/</url>
